@@ -36,8 +36,15 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
+  let numbers = [];
+  for (let i in input) {
+    let result = input[i].filter(number => number === target);
+    if (result.length > 0) {
+      numbers.push(...result);
+    }
+  }
+  return numbers.length;
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
@@ -50,6 +57,16 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
+  let numberArray = [];
+  for (let i in input) {
+    numberArray.push(input[i].reduce((a, b) => a + b));
+  }
+  if (numberArray.length === 0) {
+    return 0;
+  } else {
+    let answer = numberArray.reduce((a, b) => a + b);
+    return answer;
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -66,6 +83,13 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+  let result = input.map(i => {
+    return i.filter(a => typeof a === 'number' && a % 5 === 0);
+  });
+  let power = result.map(i => {
+    return i.map(a => 2 ** a);
+  });
+  return power
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -132,7 +156,17 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
   // Solution code here...
+  let array = [];
+data.map(i => {
+  if(i.gender === 'male' || i.gender === 'female'){
+    array.push(i.name);
+    array.push('and')
+  }
+})
+array.splice(-1,1);
+return array.join(' ');
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -142,6 +176,8 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 
 let findShortest = (data) => {
   // Solution code here...
+  let result = data.sort((a,b) => a.height - b.height)
+  return result[0].name
 };
 
 /* ------------------------------------------------------------------------------------------------
