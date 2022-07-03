@@ -1,190 +1,115 @@
-'use strict';
+'use string';
 
-const { Node, LinkedList } = require('../LinkedList');
-
-
-/// REVISIT TESTS
-
+//let { LinkedList } = require('../linkedlist');
+let { LinkedList } = require('../linkedlist');
 let linkedList = new LinkedList();
 
-describe('Testing Linked Lists', () => {
-
-  // Can successfully instantiate an empty linked list
-  test('Successfully instantiates an empty linked list', () => {
-
+describe('Linked List Tests', () => {
+  test('Can Instantiate An Empty Linked List', () => {
     expect(linkedList.head).toBeNull();
-    expect(linkedList.head).toBeFalsy();
+  })
+  test('CAN Insert Into Linked List', () => {
+    const list = new LinkedList();
+    list.append('node');
+    expect(list.head.value).toEqual('node');
+    // linkedList.instertAtHead(1);
+    // linkedList.instertAtHead('a');
+    // linkedList.instertAtHead('Naruto');
+    // expect(linkedList.head.value).toEqual('Naruto');
+    // expect(linkedList.head.next.value).toEqual('a');
+    // expect(linkedList.head.next.next.value).toEqual(1);
+    // expect(linkedList.head.next.next.next).toBeNull();
+  })
 
-  });
+  test('The Head Property WILL Point to the First NODE in Linked List', () => {
+    const list = new LinkedList();
+    list.append('part');
+    expect(list.head.next).toEqual(null);
+    // expect(linkedList.head.value).toEqual('Naruto');
+  })
 
-  // Can properly insert into the linked list
-  test('Properly inserts into the linked list', () => {
-    linkedList.insert(1);
+  test('CAN Insert Multiple NODES into Linked List', () => {
+    const list = new LinkedList();
+    list.append('PartOne');
+    list.append('PartTwo');
+    list.append('AIRBORNE');
+    //list.append('poop');
+    expect(list.head.next.next.value).toEqual('AIRBORNE');
+  })
 
-    expect(linkedList.head.value).toEqual(1);
-    expect(linkedList.head.next).toBeNull();
+  test('Will Return TRUE when Finding Value w/in Existing Linked List', () => {
+    const list = new LinkedList();
+    list.append('PartOne');
+    list.append('PartTwo');
+    list.append('AIRBORNE');
 
-  });
-
-  // The head property will properly point to the first node in the linked list
-  test('The head property properly points to the first node in the linked list', () => {
-    let linkedList = new LinkedList();
-
-  });
-
-  // Can properly insert multiple nodes into the linked list
-  test('Properly inserts multiple nodes into the linked list', () => {
-    linkedList.insert(2);
-    linkedList.insert(3);
-    linkedList.insert(4);
-
-    expect(linkedList.head.value).toEqual(4);
-    expect(linkedList.head.next.value).toEqual(3);
-    expect(linkedList.head.next.next.value).toEqual(2);
-    expect(linkedList.head.next.next.next.value).toEqual(1);
-    expect(linkedList.head.next.next.next.next).toBeNull();
-  });
-
-  // Will return true when finding a value within the linked list that exists
-  test('Returns true when finding a value within the linked list that exists', () => {
-    let result = linkedList.includes(1);
-
+    let result = list.includes('PartOne');
+    let result2 = list.includes('PartTwo');
     expect(result).toBeTruthy();
+    expect(result2).toBeTruthy();
+  })
 
+  test('Will Return FALSE when Searching for Value w/in Linked List that does NOT Exist', () => {
+    const list = new LinkedList();
+    list.append('PartOne');
+    list.append('PartTwo');
+    list.append('AIRBORNE');
+
+    let result = linkedList.includes('James Spader');
+    let result2 = linkedList.includes('Mad Titan Thanos');
+    expect(result).toBeFalsy();
+    expect(result2).toBeFalsy();
+  })
+
+  test('CAN Return Collection of ALL VALUES that Exist w/in Linked List', () => {
+    let emptyArray = [];
+    const list = new LinkedList();
+    list.append('PartOne');
+    list.append('PartTwo');
+    list.append('AIRBORNE');
+
+    emptyArray.push(list);
+    // let result = list.toString();
+    // let expected = '{AIRBORNE} -> {PartTwo} -> {PartOne} -> {Naruto} -> {a} -> {1} -> NULL';
+    expect(emptyArray).toEqual([list]);
+  })
+
+  test('CAN Return Value & Node KTH from End of List', () => {
+    const list = new LinkedList();
+    list.append('PartOne');
+    list.append('PartTwo');
+    list.append('AIRBORNE');
+
+    let result = list.kthFromEnd(2);
+    console.log(result);
+    expect(result).toEqual('PartOne');
+    let resultTwo = list.kthFromEnd(1);
+    expect(resultTwo).toEqual('PartTwo');
+    let resultThree = console.log(list.kthFromEnd(20));
+    expect(resultThree).toBeFalsy();
+  })
+  test('CAN Zipper Two Linked Lists', () => {
+    const list1 = new LinkedList();
+    const list2 = new LinkedList();
+    const zipped = new LinkedList();
+
+    list1.append(1);
+    list1.append(3);
+    list1.append(2);
+
+    list2.append(5);
+    list2.append(9);
+    list2.append(4);
+
+    const zipperedList = zipped.zipLists(list1, list2);
+
+    expect(zipperedList.head.value).toEqual(1);
+    expect(zipperedList.head.next.value).toEqual(5);
+    expect(zipperedList.head.next.next.value).toEqual(3);
+    expect(zipperedList.head.next.next.next.value).toEqual(9);
+    expect(zipperedList.head.next.next.next.next.value).toEqual(2);
+    expect(zipperedList.head.next.next.next.next.next.value).toEqual(4);
+    expect(zipperedList.head.next.next.next.next.next.next).toEqual(null);
   });
-
-  // Will return false when searching for a value in the linked list that does not exist
-  test('Returns false when searching for a value in the linked list that does not exist', () => {
-    let anotherResult = linkedList.includes('not included');
-
-    expect(anotherResult).toBeFalsy();
-
-  });
-
-  // Can properly return a collection of all the values that exist in the linked list
-  test('Properly returns a collection of all the values that exist in the linked list', () => {
-    let linkedList = new LinkedList();
-    linkedList.toString(6);
-    expect().toBeEqual();
-
-  });
-
-  // Can successfully add a node to the end of the linked list
-  test('Adds a node to the end of the linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.append(4);
-    expect().toBeEqual();
-
-  });
-
-  // Can successfully add multiple nodes to the end of a linked list
-  test('Adds multiple nodes to the end of a linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.append(4, 5, 6);
-    expect().toBeEqual();
-
-  });
-
-  // Can successfully insert a node before a node located i the middle of a linked list
-  test('Inserts a node before a node located i the middle of a linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insertBefore(3, 7);
-    expect().toBeEqual();
-
-  });
-  // Can successfully insert a node before the first node of a linked list
-  test('Inserts a node before the first node of a linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insertBefore(1, 8);
-    expect().toBeEqual();
-
-  });
-  // Can successfully insert after a node in the middle of the linked list
-  test('Inserts after a node in the middle of the linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insertAfter(4, 6);
-    expect().toBeEqual();
-
-  });
-  // Can successfully insert a node after the last node of the linked list
-  test('Inserts a node after the last node of the linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insertAfter(4, 6);
-    expect().toBeEqual();
-
-  });
-
-
-  // CC 07
-
-  // Where k is greater than the length of the linked list
-  test('k is greater than the length of the linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insert(1);
-    linkedList.insert(2);
-    linkedList.insert(3);
-    linkedList.insert(4);
-    linkedList.kthFromEnd(8);
-    expect().toBeEqual();
-
-  });
-  // Where k and the length of the list are the same
-  test('k = the length of the linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insert(1);
-    linkedList.insert(2);
-    linkedList.insert(3);
-    linkedList.insert(4);
-    linkedList.kthFromEnd(4);
-    expect().toBeEqual();
-
-  });
-  // Where k is not a positive integer
-  test('k is a negative number', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insert(1);
-    linkedList.insert(2);
-    linkedList.insert(3);
-    linkedList.insert(4);
-    linkedList.kthFromEnd(-2);
-    expect().toBeEqual();
-
-  });
-  // Where the linked list is of a size 1
-  test('the length of the list is 1', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insert(1);
-    linkedList.kthFromEnd(0);
-    expect().toBeEqual();
-
-  });
-  // “Happy Path” where k is not at the end, but somewhere in the middle of the linked list
-  test('the node value kth from the end of the linked list', async () => {
-    let linkedList = new LinkedList();
-    linkedList.insert(1);
-    linkedList.insert(2);
-    linkedList.insert(3);
-    linkedList.insert(4);
-    linkedList.kthFromEnd(2);
-    expect().toBeEqual();
-
-  });
-
-  // CC 08
-
-  // Where 2 linked lists zip together into 1 linked list
-  test('the length of the list is 1', async () => {
-    let linkedList1 = new LinkedList();
-    linkedList1.insert(1);
-    linkedList1.insert(3);
-    linkedList1.insert(2);
-    let linkedList2 = new LinkedList();
-    linkedList2.insert(5);
-    linkedList2.insert(9);
-    linkedList2.insert(4);
-    expect().text('{1} -> {5} -> {3} -> {9} -> {2} -> {4} -> null')
-
-  });
-
-
 })
+
