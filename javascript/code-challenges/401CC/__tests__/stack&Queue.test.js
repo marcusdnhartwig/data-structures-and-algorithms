@@ -1,200 +1,142 @@
 'use strict';
 
-const { Stack, Queue } = require('../stack&Queue.js');
-//const { PseudoQueue } = require('../stack-queue-pseudo');
-//const { AnimalShelter } = require('../stack-queue-animal-shelter');
-//const validate = require('../stack-queue-brackets');
+const stacksAndQueues = require('../stack&Queue.js');
 
-//CC 10
-describe('Tests for Stack', () => {
-  test('Can successfully push onto a stack', () => {
-    let stack = new Stack();
-    stack.push(1);
+describe('testing functionality of stacks and queues constructors and methods', () => {
+  it ('should successfully push onto a stack', () => {
+    const stack = new stacksAndQueues.stack();
+    const newNode = new stacksAndQueues.node('first');
+    stack.push(newNode);
 
-    expect(stack.top.value).toEqual(1);
+    expect(stack.top.value).toEqual('first');
   });
 
-  test('Can successfully push multiple values onto a stack', () => {
-    let stack = new Stack();
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+  it ('should successfully push multiple values onto a stack', () => {
+    const stack = new stacksAndQueues.stack();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    stack.push(newNode);
+    stack.push(newNodeTwo);
 
-    expect(stack.top.value).toEqual(3);
-    expect(stack.top.next.value).toEqual(2);
-    expect(stack.top.next.next.value).toEqual(1);
+    expect(stack.top.value).toEqual('second');
+    expect(stack.top.next.value).toEqual('first');
   });
 
-  test('Can successfully pop off the stack', () => {
-    let stack = new Stack();
-    stack.push(3);
+  it ('should successfully pop off the stack', () => {
+    const stack = new stacksAndQueues.stack();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    stack.push(newNode);
+    stack.push(newNodeTwo);
     stack.pop();
 
-    expect(stack.top).toBeNull();
-
+    expect(stack.top.value).toEqual('first');
+    expect(stack.top.next).toEqual(null);
   });
 
-  test('Can successfully empty a stack after multiple pops', () => {
-    let stack = new Stack();
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.pop();
-    stack.pop();
-    stack.pop();
+  it ('should successfuly empty a stack after multiple pops', () => {
+    const stack = new stacksAndQueues.stack();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    stack.push(newNode);
+    stack.push(newNodeTwo);
+    let returnOne = stack.pop();
+    let returnTwo = stack.pop();
 
-    expect(stack.next).toBeUndefined();
+    expect(returnOne).toEqual('second');
+    expect(returnTwo).toEqual('first');
+    expect(stack.isEmpty()).toBeTruthy();
   });
 
-  test('Can successfully instantiate an empty stack', () => {
-    let stack = new Stack();
-    stack.push(1);
-    stack.push(2);
-    stack.isEmpty();
+  it ('should successfully peek the next item on the stack', () => {
+    const stack = new stacksAndQueues.stack();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    stack.push(newNode);
+    stack.push(newNodeTwo);
+    let test = stack.peek();
 
-    this.isNot;
+    expect(test).toEqual('second');
   });
 
-  test('Can successfully peek the next item on the stack', () => {
-    let stack = new Stack();
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.peek();
+  it ('should successfully instantiate an empty stack', () => {
+    const stack = new stacksAndQueues.stack();
 
-    expect(stack.top.value).toEqual(3);
+    expect(stack.top).toEqual(null);
+    expect(stack.isEmpty()).toBeTruthy();
   });
 
-  test('Calling pop or peek on empty stack raises exception', () => {
-    let stack = new Stack();
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.pop();
-    stack.pop();
-    stack.pop();
-    stack.peek();
+  it ('calling pop or peek on empty stack raises exception', () => {
+    const stack = new stacksAndQueues.stack();
 
-    expect(stack.top.valu).toThrow('undefined');
+    expect(() => stack.pop().toThrow('no node in stack'));
+    expect(() => stack.peek().toThrow('no node in stack'));
   });
 
-  test('Can successfully enqueue into a queue', () => {
-    let queue = new Queue();
-    queue.enqueue(1);
-    queue.enqueue(2);
-    queue.enqueue(3);
+  it ('should successfully enqueue into a queue', () => {
+    let queue = new stacksAndQueues.queue();
+    const newNode = new stacksAndQueues.node('first');
+    queue.enqueue(newNode);
 
-    expect(queue.value).toEqual(1);
-    expect(queue.next.value).toEqual(2);
-    expect(queue.next.next.value).toEqual(3);
+    expect(queue.rear.value).toEqual('first');
+    expect(queue.front.value).toEqual('first');
   });
 
-  test('Can successfully enqueue multiple values into a queue', () => {
+  it ('should successfully enqueue multiple values into a queue', () => {
+    let queue = new stacksAndQueues.queue();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    queue.enqueue(newNode);
+    queue.enqueue(newNodeTwo);
 
-
-    expect().toEqual();
+    expect(queue.rear.value).toEqual('second');
+    expect(queue.front.value).toEqual('first');
   });
 
-  test('Can successfully dequeue out of a queue the expected value', () => {
+  it ('should successfully dequeue out of a queue the expected value', () => {
+    let queue = new stacksAndQueues.queue();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    queue.enqueue(newNode);
+    queue.enqueue(newNodeTwo);
+    let test = queue.dequeue();
 
-
-    expect().toEqual();
+    expect(test).toEqual('first');
   });
 
-  test('Can successfully peek into a queue, seeing the expected value', () => {
+  it ('should successfully peek into a queue, seeing the expected value', () => {
+    let queue = new stacksAndQueues.queue();
+    const newNode = new stacksAndQueues.node('first');
+    queue.enqueue(newNode);
+    let test = queue.peek();
 
-
-    expect().toEqual();
+    expect(test).toEqual('first');
   });
 
-  test('Can successfully empty a queue after multiple dequeues', () => {
+  it ('should successfully empty a queue after multiple dequeues', () => {
+    let queue = new stacksAndQueues.queue();
+    const newNode = new stacksAndQueues.node('first');
+    const newNodeTwo = new stacksAndQueues.node('second');
+    queue.enqueue(newNode);
+    queue.enqueue(newNodeTwo);
+    let testOne = queue.dequeue();
+    let testTwo = queue.dequeue();
 
-
-    expect().toEqual();
+    expect(testOne).toEqual('first');
+    expect(testTwo).toEqual('second');
+    expect(queue.isEmpty()).toBeTruthy();
   });
 
-  test('Can successfully instantiate an empty queue', () => {
+  it ('should successfully instantiate an empty queue', () => {
+    let queue = new stacksAndQueues.queue();
 
-
-    expect().toEqual();
+    expect(queue.isEmpty()).toBeTruthy();
   });
 
-  test('Calling dequeue or peek on empty queue raises exception', () => {
+  it ('calling dequeue or peek on empty queue raises exception', () => {
+    const queue = new stacksAndQueues.queue();
 
-
-    expect().toEqual();
+    expect(() => queue.pop().toThrow('no node in queue'));
+    expect(() => queue.peek().toThrow('no node in queue'));
   });
 });
-
-
-//CC 11
-// describe('Tests for pseudo queue', () => {
-//   test('Can successfully enqueue onto a stack', () => {
-//     let queue = new PseudoQueue();
-//     queue.enqueue(1);
-//     queue.enqueue(2);
-//     queue.enqueue(3);
-
-//     expect(queue.top.value).toEqual(3);
-//     expect(queue.top.next.value).toEqual(2);
-//     expect(queue.top.next.next.value).toEqual(1);
-//   });
-
-//   test('Can successfully dequeue from a stack', () => {
-//     let queue = new PseudoQueue();
-//     queue.dequeue(8);
-//     queue.dequeue(9);
-
-//     expect(queue.top.value).toBeNull();
-//   });
-// });
-
-
-//CC 12
-// describe('Tests for animal shelter queue', () => {
-//   test('Can successfully enqueue dog queue', () => {
-//     let dogQueue = new AnimalShelter();
-//     dogQueue.enqueue('dog');
-
-//     expect(dogQueue.front.value).toEqual('dog');
-//     expect(dogQueue.back.value).toBeNull();
-//   });
-
-//   test('Can successfully enqueue cat queue', () => {
-//     let catQueue = new AnimalShelter();
-//     catQueue.enqueue('cat');
-
-//     expect(catQueue.front.value).toEqual('cat');
-//     expect(catQueue.back.value).toBeNull();
-//   });
-
-//   test('Can successfully dequeue dog queue', () => {
-//     let dogQueue = new AnimalShelter();
-//     dogQueue.dequeue('dog');
-
-//     expect(dogQueue.front.value).toBeNull();
-//   });
-
-//   test('Can successfully dequeue cat queue', () => {
-//     let catQueue = new AnimalShelter();
-//     catQueue.dequeue('cat');
-
-//     expect(catQueue.front.value).toBeNull();
-//   });
-// });
-
-//CC 12
-// describe('Tests stack queue brackets', () => {
-//   test('returns TRUE if brackets are balanced in string', () => {
-//     let bracket = validate('{[]}');
-
-//     expect(bracket).toBeTruthy();
-//   });
-
-//   test('returns FALSE if brackets are balanced in string', () => {
-//     let bracket = validate('{[}]');
-
-//     expect(bracket).toBeFalsy();
-//   });
-
-// });

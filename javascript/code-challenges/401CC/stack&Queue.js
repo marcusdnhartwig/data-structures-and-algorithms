@@ -1,62 +1,110 @@
 'use strict';
 
-// I am calling Node from LinkedList.js in order
-//  to keep from re-inputing an entire Node
-const { Node } = require('./LinkedList');
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
 
 class Stack {
   constructor() {
     this.top = null;
   }
-  push(value){
-    let newNode = new Node(value);
-    newNode.next = this.top;
-    this.top = newNode;
-  }
-  pop(){
-    if(this.top !== null) {
-      let node = this.top;
-      this.top = node.next;
-      return node;
-    }
-  }
-  peek(){
-    return this.top.value;
-  }
-  isEmpty() {
-    if(this.top === null) {
-      return true;
+
+  push(node) {
+    if (this.isEmpty()) {
+      this.top = node;
+      return;
     } else {
-      return false;
+      node.next = this.top;
+      this.top = node;
     }
+    this.top;
+  }
+
+  pop() {
+    if (this.isEmpty()){
+      throw 'no node in stack';
+    } else {
+      let temp = this.top;
+
+      this.top = temp.next;
+      temp.next = null;
+      return temp.value;
+    }
+  }
+
+  peek() {
+    if (this.isEmpty()){
+      throw 'no node in stack';
+    } else {
+      return this.top.value;
+    }
+  }
+
+  isEmpty() {
+    return this.top === null;
   }
 }
+
 
 class Queue {
-  constructor(){
-    this.fron = null;
-    this.back = null;
+  constructor() {
+    this.front = null;
+    this.rear = null;
   }
-  enqueue(value){
-    let newNode = new Node(value);
-    if(this.front){
-      this.back.next = newNode;
+
+  enqueue(node) {
+    if (this.isEmpty()) {
+      this.front = node;
+      this.rear = node;
     } else {
-      this.front = newNode;
+      this.rear.next = node;
+      this.rear = node;
     }
-    this.back = newNode;
   }
-  dequeue(){
+
+  dequeue() {
+    if (this.isEmpty()){
+      throw 'no node in queue';
+    } else {
+      let temp = this.front;
+
+      this.front = temp.next;
+      temp.next = null;
+      return temp.value;
+    }
   }
-  peek(){
+
+  peek() {
+    if (this.isEmpty()){
+      throw 'no node in queue';
+    } else {
+      return this.front.value;
+    }
   }
-  isEmpty(){
+
+  isEmpty() {
+    return this.front === null;
   }
 }
 
-
+let stack = new Stack();
+let nodeA = new Node('first');
+let nodeB = new Node('second');
+stack.push(nodeA);
+stack.push(nodeB);
+// let top = stack.pop();
+// console.log(top);
+let queue = new Queue();
+queue.enqueue(nodeA);
+queue.enqueue(nodeB);
+// console.log('this is queue peek', queue.peek());
+// console.log(queue);
 
 module.exports = {
-  Stack,
-  Queue,
+  stack: Stack,
+  queue: Queue,
+  node: Node,
 };
