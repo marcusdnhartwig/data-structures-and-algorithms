@@ -1,6 +1,6 @@
 'use strict';
 
-const trees = require('../treeMax16.js');
+const trees = require('./treeMax16.js');
 
 describe('testing functionality of binary trees and binary search trees', () => {
   it ('should instantiate an empty tree', () => {
