@@ -1,6 +1,6 @@
 'use strict';
 
-const trees = require('./treeMax16.js');
+const trees = require('../treeMax16.js');
 
 describe('testing functionality of binary trees and binary search trees', () => {
   it ('should instantiate an empty tree', () => {
@@ -19,7 +19,7 @@ describe('testing functionality of binary trees and binary search trees', () => 
     test.root.right = new trees.node(5);
     test.root.right.right = new trees.node(9);
     test.root.right.right.left = new trees.node(4);
-    const testValue = test.findMaximumValue();
+    const testValue = test.maxValue();
 
     expect(testValue).toEqual(11);
   });
@@ -27,7 +27,7 @@ describe('testing functionality of binary trees and binary search trees', () => 
   it ('should return the maximum value in the tree with one node', () => {
     const test = new trees.tree();
     test.root = new trees.node(2);
-    const testValue = test.findMaximumValue();
+    const testValue = test.maxValue();
 
     expect(testValue).toEqual(2);
   });
