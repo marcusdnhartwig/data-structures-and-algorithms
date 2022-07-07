@@ -27,7 +27,7 @@ describe('testing functionality of binary trees and binary search trees', () => 
   it ('should return the maximum value in the tree with one node', () => {
     const test = new trees.tree();
     test.root = new trees.node(2);
-    const testValue = test.maxValue();
+    const testValue = test.findMaximumValue();
 
     expect(testValue).toEqual(2);
   });

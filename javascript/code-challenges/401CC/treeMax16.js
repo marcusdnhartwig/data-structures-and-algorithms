@@ -43,6 +43,7 @@ function maxTree(root) {
 
 console.log(maxTree(newTree.root));
 module.exports = {
-  maxTree: maxTree,
+  maxTree: tree,
+
 }; //please add this
 console.log();
