@@ -1,6 +1,6 @@
 'use strict';
 
-const psuedo = require('../stack-queue-psuedo11.js');
+const psuedo = require('../11stack-queue-psuedo.js');
 
 describe('testing pseudoqueue functionality', () => {
   const pseudoQueue = new psuedo.queue();

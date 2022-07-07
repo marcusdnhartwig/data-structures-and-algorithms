@@ -1,6 +1,6 @@
 'use strict';
 
-// Trees
+
 class Node {
   constructor(value) {
     this.value = value;
@@ -14,6 +14,7 @@ class Tree {
     this.root = null;
   }
 
+  // Code Challenge 15 Binary Tree and BST Implementation /////////////////////////////////////
   preOrder() {
     const values = [];
     const preOrder = (node) => {
@@ -79,15 +80,13 @@ class Tree {
 
     while (stack.length) {
 
-      // console.log(current.value);
-
+      // Reversed because of how are stack handles order (FiLo).
       if (current.right) {
         stack.push(current.right);
       }
       if (current.left) {
         stack.push(current.left);
       }
-
       current = stack.pop();
     }
   }
@@ -100,11 +99,8 @@ class Tree {
     queue.unshift(this.root);
 
     while (queue.length) {
-
       current = queue.pop();
-
       console.log(current.value);
-
       if (current.left) {
         queue.unshift(current.left);
       }
@@ -113,7 +109,71 @@ class Tree {
       }
     }
   }
+
+  // Code Challenge 16 Maximum Value  //////////////////////////////////////////////////////////
+
+  findMaximumValue () {
+    let current = this.root;
+    // console.log('current', current);
+    if (!current) {
+      throw 'no nodes in tree';
+    }
+
+    const findMax = (node) => {
+      // traverse the tree
+      //// find max value to the left
+      ///// find max value to the right
+      if (node === null){
+        return;
+      }
+      let max = node.value;
+      let leftMax = findMax(node.left);
+      let rightMax = findMax(node.right);
+
+      if(leftMax > max){
+        max = leftMax;
+      }
+      if(rightMax > max){
+        max = rightMax;
+      }
+      return max;
+    };
+    return findMax(current);
+  }
+
+  // Code Challenge 17 Breadth First  //////////////////////////////////////////////////////////
+
+  breadthFirstTraversal() {
+    let levels = [];
+    let traverse = (current, depth) => {
+      if (!current) {
+        return null;
+      }
+      if (!levels[depth]) {
+        levels[depth] = [current.value];
+      } else {
+        levels[depth].push(current.value);
+      }
+      traverse(current.left, depth + 1);
+      traverse(current.right, depth + 1);
+    };
+    traverse(this.root, 0);
+    let flattenArray = (array, result = []) => {
+      for (let i = 0; i < array.length; i++) {
+        let value = array[i];
+        if(Array.isArray(value)) {
+          flattenArray(value, result);
+        } else {
+          result[result.length] = value;
+        }
+      }
+      return result;
+    };
+    return flattenArray(levels);
+  }
 }
+
+// Code Challenge 15 Binary Tree and BST Implementation /////////////////////////////////////
 
 class BinarySearchTree {
   constructor() {
@@ -154,9 +214,12 @@ class BinarySearchTree {
     }
     let current = this.root;
     let found = false;
+    //cycle through while loop until hit a leaf or match with value
     while(current && !found){
+      //if value is less than current node's value - go left
       if(value < current.value){
         current = current.left;
+      //if value is greater than current node's value - go right;
       } else if (value > current.value){
         current = current.right;
       } else {
@@ -172,19 +235,23 @@ const binaryTree = new BinarySearchTree();
 binaryTree.root = new Node(5);
 binaryTree.root.left = new Node(3);
 binaryTree.root.right = new Node(15);
-console.log(binaryTree.contains(20));
+// console.log(binaryTree.contains(20));
 
-// const tree = new Tree();
+const tree = new Tree();
 
-// tree.root = new Node(5);
-// tree.root.left = new Node(10);
-// tree.root.left.left = new Node(0);
-// tree.root.left.right = new Node(20);
-// tree.root.right = new Node(15);
-// tree.root.right.right = new Node(25);
+tree.root = new Node(5);
+tree.root.left = new Node(10);
+tree.root.left.left = new Node(0);
+tree.root.left.right = new Node(20);
+tree.root.right = new Node(15);
+tree.root.right.right = new Node(25);
 
+// console.log(tree.breadthFirstTraversal());
+// console.log(tree.inOrder());
+// console.log(tree.postOrder());
 
-// console.log('this is kary breadth', karyTree.breadth());
+// tree.traverseWithStack();
+// tree.breadth();
 
 module.exports = {
   node: Node,

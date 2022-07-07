@@ -1,6 +1,6 @@
 'use strict';
 
-const bracket = require('../stack&Queue-brackets13');
+const bracket = require('../13stack&Queue-brackets');
 
 describe('testing the multi bracket validation function', () => {
   it('should return true for matching brackets', () => {

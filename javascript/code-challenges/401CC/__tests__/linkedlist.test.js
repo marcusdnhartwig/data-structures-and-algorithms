@@ -1,7 +1,7 @@
 'use string';
 
 //let { LinkedList } = require('../linkedlist');
-let { LinkedList } = require('../LinkedList06-09');
+let { LinkedList } = require('../06-09LinkedList');
 let linkedList = new LinkedList();
 
 describe('Linked List Tests', () => {

@@ -23,8 +23,8 @@ class Cat extends Animal {
 
 class AnimalShelter {
   constructor() {
-    this.cat = new Queue();
-    this.dog = new Queue();
+    this.cat = new Aqueue();
+    this.dog = new Aqueue();
   }
 
   //enqueue(animal): adds animal to the shelter, animal can be either cat or dog
@@ -56,7 +56,7 @@ class AnimalShelter {
   }
 }
 
-class Queue {
+class Aqueue {
   constructor() {
     this.front = null;
     this.rear = null;
@@ -116,5 +116,5 @@ module.exports = {
   Dog,
   Cat,
   AnimalShelter,
-  Queue,
+  Aqueue,
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-const stacksAndQueues = require('../stack&Queue10.js');
+const stacksAndQueues = require('../10stack&Queue.js');
 
 describe('testing functionality of stacks and queues constructors and methods', () => {
   it ('should successfully push onto a stack', () => {

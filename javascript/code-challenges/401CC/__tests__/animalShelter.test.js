@@ -1,6 +1,6 @@
 'use strict';
 
-const shelter = require('../animalShelter12.js');
+const shelter = require('../12animalShelter.js');
 const cat = new shelter.Cat();
 const dog = new shelter.Dog();
 

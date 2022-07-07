@@ -3,6 +3,7 @@
 // challenge 06: append(value),
 // insertBefore(value, newValue),
 // insertAfter(value, newValue)
+//////////////////////////////////////////////////////////////
 
 class Node {
   constructor(value) {
@@ -90,7 +91,7 @@ class LinkedList {
       newNode.next = current;
       previous.next = newNode;
     }
-    console.log(LinkedList)
+    console.log(LinkedList);
   }
 
   insertAfter(value, newValue) {
@@ -98,9 +99,9 @@ class LinkedList {
     let current = this.head;
     while (current) {
       if (current.value === value) {
-        next.value = newValue;
+        newNode.value = newValue;
         newValue.next = current.next;
-        next.next++;
+        newNode.next++;
       } else {
         current = current.next;
       }
@@ -108,7 +109,7 @@ class LinkedList {
     }
   }
 
-  // Code Challenge 07: kthFromEnd(k)
+  // Code Challenge 07: kthFromEnd(k) ////////////////////////
   kthFromEnd(k) {
     let newArray = [];
     let currentNode = this.head;
@@ -126,7 +127,7 @@ class LinkedList {
     }
   }
 
-  // Code Challenge 08: zipList(listOne, ListTwo)
+  // Code Challenge 08: zipList(listOne, ListTwo) ///////////////////////
   zipLists(list1, list2) {
     let zipper = new LinkedList();
     let currentA = list1.head;
