@@ -32,7 +32,7 @@ class LinkedList {
     current.next = node;
   }
 
-  traverse() {
+  traverse() { 
     let current = this.head;
     while (current) {
       current = current.next;
