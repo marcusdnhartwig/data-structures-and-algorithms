@@ -11,23 +11,18 @@ class LinkedList {
   constructor() {
     this.head = null;
   }
-
   insert(value) {
     let node = new Node(value);
-
     if (this.head === null) {
       this.head = node;
       return;
     }
-
     let current = this.head;
     while (current.next) {
       current = current.next;
     }
-
     current.next = node;
   }
-
   includes(value) {
     let current = this.head;
     while (current) {
@@ -49,21 +44,16 @@ class HashTable {
 
   }
   hash(key) {
-
     let asciiSum = key.split('').reduce((acc, char) => {
       return acc + char.charCodeAt(0);
     }, 0);
-
     return (asciiSum * 599) % this.size;
   }
-
   add(key, value) {
     let hash = this.hash(key);
-
     if (!this.buckets[hash]) {
       this.buckets[hash] = new LinkedList();
     }
-
     let data = { [key]: value };
     this.buckets[hash].insert(data);
   }
@@ -75,12 +65,10 @@ class HashTable {
       return false;
     }
   }
-
   get(key) {
     let hash = this.hash(key);
     let bucket = this.buckets[hash];
     let current = bucket.head;
-
     while (current){
       if(current.value[key]) {
         return current.value[key];
