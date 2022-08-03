@@ -1,21 +1,20 @@
-' use strict';
+'use strict';
 
-class Vertex{
-  constructor(value){
+class Vertex {
+  constructor(value) {
     this.value = value;
   }
 }
 
 class Edge {
-  constructor(vertex, weight = 0){
-    this.vertex = vertex;
+  constructor(vertex, weight) {
+    this.vertex = vertex,
     this.weight = weight;
   }
-
 }
 
-class Graph{
-  constructor(){
+class Graph {
+  constructor() {
     this.adjacencyList = new Map();
   }
 }
