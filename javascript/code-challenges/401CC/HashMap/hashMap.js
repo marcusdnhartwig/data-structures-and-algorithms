@@ -12,8 +12,11 @@ function repeatedWord(string) {
   const table = new hash.HashTable(1024);
   //find matches
   const words = string.match(/((\b[^\s]+\b)((?<=\.\w).)?)/g);
+  // console.log(words);
+
   for(let i = 0; i < words.length; i++){
     let key = words[i].toLowerCase();
+
     if (table.contains(key)){
       return table.get(key);
     }
@@ -21,4 +24,9 @@ function repeatedWord(string) {
   }
 
 }
+
+// console.log(repeatedWord(testOne));
+// console.log(repeatedWord(testTwo));
+// console.log(repeatedWord(testThree));
+
 module.exports = repeatedWord;
